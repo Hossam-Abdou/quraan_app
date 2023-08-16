@@ -27,4 +27,11 @@ class GetAzkarError extends SystemState {
   GetAzkarError(this.error);
 }
 
+class GetSalahSuccess extends SystemState {}
+class GetSalahError extends SystemState {
+  String? error;
+
+  GetSalahError(this.error);
+}
+
 

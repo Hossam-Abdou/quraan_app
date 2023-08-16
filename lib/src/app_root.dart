@@ -5,7 +5,6 @@ import 'package:quraan_app_test/screens/quraan_screen.dart';
 
 import '../blocs/system_cubit.dart';
 import '../screens/azkar_screen.dart';
-import '../screens/login_screen.dart';
 import '../screens/mwaayd_elsalah_screen.dart';
 import '../screens/new.dart';
 import '../screens/splash_screen.dart';

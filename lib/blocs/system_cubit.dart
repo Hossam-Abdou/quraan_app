@@ -25,11 +25,12 @@ class SystemCubit extends Cubit<SystemState> {
   }
   SurahModel? surahModel;
   AyahModel? ayahs;
+  SalahModel? salahModel;
 
   Future<void> getAllSurah() async {
     await DioHelper.init(
       BaseOptions(
-        baseUrl: 'https://api.alquran.cloud/', // First base URL
+        baseUrl: 'https://api.alquran.cloud/',
         receiveDataWhenStatusError: true,
       ),
     );
@@ -49,11 +50,10 @@ class SystemCubit extends Cubit<SystemState> {
     );
   }
 
-SalahModel? salahModel;
   Future<void> getAllSalah() async {
     await DioHelper.init(
       BaseOptions(
-        baseUrl: 'https://api.aladhan.com/', // First base URL
+        baseUrl: 'https://api.aladhan.com/',
         receiveDataWhenStatusError: true,
       ),
     );
@@ -68,12 +68,12 @@ SalahModel? salahModel;
     ).then(
           (value) {
         salahModel = SalahModel.fromJson(value.data);
-        emit(GetSurahSuccess());
+        emit(GetSalahSuccess());
       },
     ).catchError(
           (error) {
         print(error);
-        emit(GetSurahError(error.toString()));
+        emit(GetSalahError(error.toString()));
       },
     );
   }

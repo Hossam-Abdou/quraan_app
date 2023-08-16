@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quraan_app_test/blocs/system_cubit.dart';
-import 'package:quraan_app_test/screens/login_screen.dart';
 import 'package:quraan_app_test/screens/register_screen.dart';
 
 import 'login_utils.dart';
