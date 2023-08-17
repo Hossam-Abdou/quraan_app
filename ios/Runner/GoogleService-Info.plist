@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>274397796619-9a6l5io5h376473667u26fquq3d7muig.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.274397796619-9a6l5io5h376473667u26fquq3d7muig</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAKBNXm1RJs4fO_VziSU_Mf0gj7ppatYKk</string>
+	<key>GCM_SENDER_ID</key>
+	<string>274397796619</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.quraanAppTest</string>
+	<key>PROJECT_ID</key>
+	<string>quraan-app-71b48</string>
+	<key>STORAGE_BUCKET</key>
+	<string>quraan-app-71b48.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:274397796619:ios:3b5cb7ab04821f67462a0e</string>
+</dict>
+</plist>

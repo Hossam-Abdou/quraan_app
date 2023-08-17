@@ -34,4 +34,23 @@ class GetSalahError extends SystemState {
   GetSalahError(this.error);
 }
 
+class Bottom extends SystemState {}
+
+class ChatRegisterloading extends SystemState {}
+class ChatRegisterSuccess extends SystemState {}
+class ChatRegisterError   extends SystemState {
+  String error;
+
+  ChatRegisterError({required this.error});
+}
+
+class ChatLoginloading extends SystemState {}
+class ChatLoginSuccess extends SystemState {}
+class ChatLoginError   extends SystemState {
+  String error;
+
+  ChatLoginError({required this.error});
+}
+
+
 

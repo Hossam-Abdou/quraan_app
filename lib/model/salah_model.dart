@@ -1,11 +1,11 @@
-class SalahModel {
+class PrayModel {
   int? code;
   String? status;
   Data? data;
 
-  SalahModel({this.code, this.status, this.data});
+  PrayModel({this.code, this.status, this.data});
 
-  SalahModel.fromJson(Map<String, dynamic> json) {
+  PrayModel.fromJson(Map<String, dynamic> json) {
     code = json['code'];
     status = json['status'];
     data = json['data'] != null ? new Data.fromJson(json['data']) : null;
@@ -25,20 +25,14 @@ class SalahModel {
 class Data {
   Timings? timings;
 
-
   Data({this.timings});
 
   Data.fromJson(Map<String, dynamic> json) {
-    timings =
-    json['timings'] != null ? new Timings.fromJson(json['timings']) : null;
-
+    timings = json['timings'] != null ? new Timings.fromJson(json['timings']) : null;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.timings != null) {
-      data['timings'] = this.timings!.toJson();
-    }
     return data;
   }
 }
@@ -83,19 +77,5 @@ class Timings {
     lastthird = json['Lastthird'];
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['Fajr'] = this.fajr;
-    data['Sunrise'] = this.sunrise;
-    data['Dhuhr'] = this.dhuhr;
-    data['Asr'] = this.asr;
-    data['Sunset'] = this.sunset;
-    data['Maghrib'] = this.maghrib;
-    data['Isha'] = this.isha;
-    data['Imsak'] = this.imsak;
-    data['Midnight'] = this.midnight;
-    data['Firstthird'] = this.firstthird;
-    data['Lastthird'] = this.lastthird;
-    return data;
-  }
+
 }
