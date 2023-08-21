@@ -22,8 +22,8 @@ class RegisterScreen extends StatelessWidget {
           ScaffoldMessenger.of(context).showSnackBar(snackBar);
         }
         if (state is ChatRegisterError) {
-          const snackBar = SnackBar(
-            content: Text('Error'),
+          SnackBar snackBar = SnackBar(
+            content: Text(state.error),
             backgroundColor: Colors.red,
           );
           ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -32,65 +32,134 @@ class RegisterScreen extends StatelessWidget {
       builder: (context, state) {
         var cubit = SystemCubit.get(context);
         return SingleChildScrollView(
-          child: Column(
-            children: [
-              Text(
-                'Creating Account',
-                style: TextStyle(color: Color(0xfffa7031), fontSize: 24),
-              ),
-              CustomField(
-                  hintText: 'Full Name', controller: cubit.userNameController),
-              CustomField(
-                  hintText: 'E-Mail', controller: cubit.emailController),
-              CustomField(
-                  hintText: 'Password', controller: cubit.passwordController),
-              CustomField(
-                  hintText: 'Confirm Password',
-                  controller: cubit.confirmPasswordController),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 23.0),
+            child: Form(
+              key: cubit.formKey,
+              child: Column(
                 children: [
-                  Checkbox(
-                      value: true,
-                      fillColor: MaterialStatePropertyAll(Color(0xfffa7031)),
-                      onChanged: (pass) {}),
-                  const Column(
-                    children: [
-                      Text('I agree all statements in '),
-                      Text(
-                        'terms of services',
-                        style: TextStyle(color: Color(0xfffa7031)),
-                      ),
-                    ],
-                  )
-                ],
-              ),
-              const SizedBox(
-                height: 40,
-              ),
-              InkWell(
-                onTap: () {
-                  cubit.Register();
-                },
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    color: Color(0xffee3e28),
+                  Text(
+                    'Creating Account',
+                    style: TextStyle(color: Color(0xfffa7031), fontSize: 20),
                   ),
-                  width: 195,
-                  height: 40,
-                  child: Center(
-                      child: Text(
-                    'Sign Up',
-                    style: TextStyle(color: Colors.white, fontSize: 20),
-                  )),
+                 const SizedBox(height: 20,),
+                  TextFormField(
+                controller: cubit.userNameController,
+                cursorColor: Colors.deepOrange,
+                validator:(value) {
+                  if(value!.isEmpty)
+                  {
+                    return 'The Field Can\'t Be Empty';
+                  }
+                  return null;
+                },
+                decoration: InputDecoration(
+                  hintText: 'Full Name',
+                  hintStyle: TextStyle(fontWeight: FontWeight.normal,color: Colors.grey),
+
                 ),
               ),
-            ],
+                  CustomTextField(
+                    validator:(value) {
+                      if(value!.isEmpty)
+                      {
+                        return 'The Field Can\'t Be Empty';
+                      }
+                      if(!RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(value))
+                      {
+                        return 'Please Enter Valid E-Mail';
+                      }
+                      return null;
+                    },
+                    controller: cubit.emailController,
+                    hintText: 'E-mail',
+                  ),
+                  TextFormField(
+                controller: cubit.passwordController,
+                cursorColor: Colors.deepOrange,
+                validator:(value) {
+                  if(value!.isEmpty)
+                  {
+                    return 'The Field Can\'t Be Empty';
+                  }
+
+                  return null;
+                },
+                decoration: InputDecoration(
+                  hintText: 'Password',
+                  hintStyle: TextStyle(fontWeight: FontWeight.normal,color: Colors.grey),
+
+                ),
+              ),
+                  TextFormField(
+                controller: cubit.confirmPasswordController,
+                cursorColor: Colors.deepOrange,
+                validator:(value) {
+                  if(value!.isEmpty)
+                  {
+                    return 'The Field Can\'t Be Empty';
+                  }
+                  if(cubit.passwordController.text!=cubit.confirmPasswordController.text)
+                    {
+                      return 'The Password s not match';
+                    }
+
+                  return null;
+                },
+                decoration: const InputDecoration(
+                  hintText: 'Confirm Password',
+                  hintStyle: TextStyle(fontWeight: FontWeight.normal,color: Colors.grey),
+
+                ),
+              ),
+                  SizedBox(height: 22,),
+
+                  Row(
+                    children: [
+                      Checkbox(
+                          value: true,
+                          fillColor: MaterialStatePropertyAll(Color(0xfffa7031)),
+                          onChanged: (pass) {}),
+                      const Column(crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('I agree all statements in '),
+                          Text('terms of services',
+                            style: TextStyle(color: Color(0xfffa7031)),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 40,
+                  ),
+                  InkWell(
+                    onTap: () async{
+                      if(cubit.formKey.currentState!.validate()){
+                        cubit.Register();
+                      }
+
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: Color(0xffee3e28),
+                      ),
+                      height: 40,
+                      child: Center(
+                          child: Text(
+                        'Sign Up',
+                        style: TextStyle(color: Colors.white, fontSize: 20),
+                      )),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
         );
       },
     );
-    ;
+
   }
 }

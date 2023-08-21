@@ -5,26 +5,24 @@ import 'package:quraan_app_test/components/customField.dart';
 
 import '../main_screens/home_screen.dart';
 
-
 class LoginScreen extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<SystemCubit, SystemState>(
-      listener: (context, state) async{
-        if(state is ChatLoginSuccess)
-        {
-          Navigator.pushReplacement(context, MaterialPageRoute(
-            builder: (context) => HomeScreen(),
-          ));
+      listener: (context, state) async {
+        if (state is ChatLoginSuccess) {
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => HomeScreen(),
+              ));
           const snackBar = SnackBar(
             content: Text('Login Successfully'),
             backgroundColor: Colors.orangeAccent,
           );
           ScaffoldMessenger.of(context).showSnackBar(snackBar);
         }
-        if(state is ChatLoginError)
-        {
+        if (state is ChatLoginError) {
           SnackBar snackBar = SnackBar(
             content: Text(state.error),
             backgroundColor: Colors.red,
@@ -33,70 +31,100 @@ class LoginScreen extends StatelessWidget {
         }
       },
       builder: (context, state) {
-        var cubit=SystemCubit.get(context);
-        return Column(
-          children: [
-            CustomField(hintText: 'UserName',controller: cubit.emailController),
-            CustomField(hintText:'Password',controller: cubit.passwordController),
-            Align(
-              alignment: Alignment.centerRight,
-              child: TextButton(
-                  onPressed: () {},
-                  child: const Text(
-                    'Forget Password',
-                    style:
-                    TextStyle(fontWeight: FontWeight.w300, color: Colors.grey),
-                  )),
-            ),
-            const SizedBox(
-              height: 40,
-            ),
-            InkWell(
-              onTap: ()
-              {
-                cubit.Login();
-              },
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: const Color(0xffee3e28),
-                ),
-                width: 195,
-                height: 40,
-                child: const Center(
-                    child: Text(
-                      'Login',
-                      style: TextStyle(color: Colors.white, fontSize: 20),
-                    )),
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                color: Color(0xff333333),
-              ),
-              width: 195,
-              height: 40,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        var cubit = SystemCubit.get(context);
+        return Form(
+          key: cubit.formKey,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 23.0),
+            child: SingleChildScrollView(
+              child: Column(
                 children: [
-                  Image.asset(
-                    'images/facebook.png',
-                    height: 25,
-                    color: Colors.white,
+                  CustomTextField(
+                    validator: (value) {
+                      if(value!.isEmpty)
+                      {
+                        return 'The Field Can\'t Be Empty';
+                      }
+                      return null;
+                    },
+                    controller: cubit.emailController,
+                    hintText: 'UserName',
                   ),
-                  const Center(
-                      child: Text(
-                        'Login With Facebook',
-                        style: TextStyle(color: Colors.white, fontSize: 12),
+                  CustomTextField(
+                    validator: (value) {
+                      if(value!.isEmpty)
+                      {
+                        return 'The Field Can\'t Be Empty';
+                      }
+                      return null;
+                    },
+                    controller: cubit.passwordController,
+                    hintText: 'Password',
+                  ),
+
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: TextButton(
+                        onPressed: () {},
+                        child: const Text(
+                          'Forget Password',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w300, color: Colors.grey),
+                        )),
+                  ),
+                  const SizedBox(
+                    height: 40,
+                  ),
+                  InkWell(
+                    onTap: () async{
+                      if(cubit.formKey.currentState!.validate()){
+                        cubit.Login();
+                      }
+
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: const Color(0xffee3e28),
+                      ),
+                      height: 40,
+                      child: const Center(
+                          child: Text(
+                        'Login',
+                        style: TextStyle(color: Colors.white, fontSize: 20),
                       )),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: Color(0xff333333),
+                    ),
+                    height: 40,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          'images/facebook.png',
+                          height: 25,
+                          color: Colors.white,
+                        ),
+                        const SizedBox(width: 5,),
+                        const Center(
+                            child: Text(
+                          'Login With Facebook',
+                          style: TextStyle(color: Colors.white, fontSize: 12),
+                        )),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
-          ],
+          ),
         );
       },
     );

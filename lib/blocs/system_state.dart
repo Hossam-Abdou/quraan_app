@@ -52,5 +52,8 @@ class ChatLoginError   extends SystemState {
   ChatLoginError({required this.error});
 }
 
+class ChangeShownFormSuccessState   extends SystemState {}
+class dataReaded   extends SystemState {}
+
 
 

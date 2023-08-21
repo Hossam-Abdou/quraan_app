@@ -15,7 +15,9 @@ class _SalahState extends State<Salah> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<SystemCubit, SystemState>(
+    return BlocProvider.value(
+  value: SystemCubit.get(context)..getPrayTime(),
+  child: BlocConsumer<SystemCubit, SystemState>(
   listener: (context, state) {},
   builder: (context, state) {
     var cubit=SystemCubit.get(context);
@@ -31,24 +33,27 @@ class _SalahState extends State<Salah> {
                   children: [
                   ClipRRect(
                       borderRadius: BorderRadius.circular(12),
-                      child: Image(image: AssetImage('images/header.png'))),
+                      child: Image.asset('images/header.png',height: 120,fit: BoxFit.fill,)),
                     Positioned(
-                      top: 18,
+                      top: 10,
                       right: 10,
                       child: Column(
                         children: [
-                          Text('data',style: TextStyle(color: Colors.white),),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 30.0),
+                            child: Text('اليوم',style: TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.w900),),
+                          ),
                           Container(
                             width: 100,
                             decoration: BoxDecoration(
                               border: Border.all(color: Colors.white),
-                                borderRadius: BorderRadius.circular(15)),
+                                borderRadius: BorderRadius.circular(8)),
                             child:
                           Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              Text('data',style: TextStyle(color: Colors.white),),
+                              Text('محرم',style: TextStyle(color: Colors.white),),
                               Container(color: Colors.white,width: 2,height: 45,),
-                              Text('data',style: TextStyle(color: Colors.white),),
+                              Text('11',style: TextStyle(color: Colors.white),),
                             ],
                           ),)
                         ],
@@ -75,11 +80,11 @@ class _SalahState extends State<Salah> {
                   ),
                 ),
                 SizedBox(height: 15,),
-                PrayTime(name:'الفجر' ,time:'${cubit.prayModel!.data!.timings!.fajr}' ),
-                PrayTime(name:'الظهر' ,time:'${cubit.prayModel!.data!.timings!.dhuhr}' ),
-                PrayTime(name:'العصر' ,time:'${cubit.prayModel!.data!.timings!.asr}' ),
-                PrayTime(name:'المغرب' ,time:'${cubit.prayModel!.data!.timings!.maghrib}' ),
-                PrayTime(name:'العشاء' ,time:'${cubit.prayModel!.data!.timings!.isha}' ),
+                CustomContainer(name:'الفجر' ,time:'${cubit.prayModel?.data?.timings?.fajr}' ),
+                CustomContainer(name:'الظهر' ,time:'${cubit.prayModel?.data?.timings?.dhuhr}' ),
+                CustomContainer(name:'العصر' ,time:'${cubit.prayModel?.data?.timings?.asr}' ),
+                CustomContainer(name:'المغرب' ,time:'${cubit.prayModel?.data?.timings?.maghrib}' ),
+                CustomContainer(name:'العشاء' ,time:'${cubit.prayModel?.data?.timings?.isha}' ),
               ],
 
             ),
@@ -88,6 +93,7 @@ class _SalahState extends State<Salah> {
       ),
     );
   },
+),
 );
   }
 }

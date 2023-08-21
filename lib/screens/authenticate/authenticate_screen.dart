@@ -1,16 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:quraan_app_test/blocs/system_cubit.dart';
 import 'package:quraan_app_test/screens/authenticate/login_screen.dart';
 import 'package:quraan_app_test/screens/authenticate/register_screen.dart';
 
-class ButtonSwitchScreen extends StatefulWidget {
+class AuthenticateScreen extends StatefulWidget {
   @override
-  _ButtonSwitchScreenState createState() => _ButtonSwitchScreenState();
+  _AuthenticateScreenState createState() => _AuthenticateScreenState();
 }
 
-class _ButtonSwitchScreenState extends State<ButtonSwitchScreen> {
+class _AuthenticateScreenState extends State<AuthenticateScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<SystemCubit, SystemState>(
@@ -20,7 +21,7 @@ class _ButtonSwitchScreenState extends State<ButtonSwitchScreen> {
         return Scaffold(
           body: Center(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 45.0),
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: SingleChildScrollView(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -28,10 +29,11 @@ class _ButtonSwitchScreenState extends State<ButtonSwitchScreen> {
                     Center(
                         child: Image.asset(
                       'images/Layer 1.png',
-                      height: 160,
+                      height: 160.h,
                     )),
                     Container(
-                      width: 210,
+                      height: 55.h,
+                      width: 282.w,
                       decoration: BoxDecoration(
                         border: Border.all(color: Colors.black),
                         borderRadius: BorderRadius.circular(15),
@@ -42,14 +44,15 @@ class _ButtonSwitchScreenState extends State<ButtonSwitchScreen> {
                         children: [
                           InkWell(
                             onTap: () {
+                              cubit.clearController();
                               cubit.switchButton(0);
                             },
                             child: Container(
-                              height: 35,
-                              width: 104,
+                              height: 55.h,
+                              width: 140.w,
                               decoration: BoxDecoration(
                                 border: cubit.buttonIndex == 0
-                                    ? Border.all(width: 0, color: Colors.black)
+                                    ? Border.all(color: Colors.black)
                                     : null,
                                 borderRadius: BorderRadius.circular(
                                     cubit.buttonIndex == 0 ? 15 : 0),
@@ -69,14 +72,15 @@ class _ButtonSwitchScreenState extends State<ButtonSwitchScreen> {
                           ),
                           InkWell(
                             onTap: () {
+                              cubit.clearController();
                               cubit.switchButton(1);
                             },
                             child: Container(
-                              height: 35,
-                              width: 104,
+                              height: 55.h,
+                              width: 140.w,
                               decoration: BoxDecoration(
                                 border: cubit.buttonIndex == 1
-                                    ? Border.all(width: 0, color: Colors.black)
+                                    ? Border.all( color: Colors.black)
                                     : null,
                                 borderRadius: BorderRadius.circular(
                                     cubit.buttonIndex == 1 ? 15 : 0),

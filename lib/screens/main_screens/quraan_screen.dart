@@ -2,13 +2,16 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quraan_app_test/blocs/system_cubit.dart';
+import 'package:quraan_app_test/model/surah_model_screen.dart';
+import 'package:quraan_app_test/screens/ayah_screen.dart';
 
-class QuraanScreen extends StatefulWidget {
-  @override
-  State<QuraanScreen> createState() => _QuraanScreenState();
-}
+import '../../model/asd.dart';
 
-class _QuraanScreenState extends State<QuraanScreen> {
+class QuraanScreen extends StatelessWidget {
+final SurahModel? surahModel;
+
+QuraanScreen({this.surahModel});
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<SystemCubit, SystemState>(
@@ -52,7 +55,7 @@ class _QuraanScreenState extends State<QuraanScreen> {
                           ),
                         ),
                         const Padding(
-                          padding:  EdgeInsets.symmetric(vertical: 9.0),
+                          padding: EdgeInsets.symmetric(vertical: 9.0),
                           child: VerticalDivider(
                             color: Colors.black,
                             width: 1,
@@ -71,7 +74,7 @@ class _QuraanScreenState extends State<QuraanScreen> {
                                   fontSize: 19)),
                         ),
                         const Padding(
-                          padding:  EdgeInsets.symmetric(vertical: 9.0),
+                          padding: EdgeInsets.symmetric(vertical: 9.0),
                           child: VerticalDivider(
                             color: Colors.black,
                             width: 1,
@@ -80,7 +83,6 @@ class _QuraanScreenState extends State<QuraanScreen> {
                         TextButton(
                           onPressed: () {
                             cubit.switchButton(2);
-
                           },
                           child: Text('الشيوخ',
                               style: TextStyle(
@@ -98,54 +100,76 @@ class _QuraanScreenState extends State<QuraanScreen> {
               const SizedBox(
                 height: 15,
               ),
-      cubit.buttonIndex==0?
-                Expanded(
-                  child: ListView.separated(
-                    shrinkWrap: true,
-                    separatorBuilder: (context, index) => const Padding(
-                      padding:  EdgeInsets.symmetric(horizontal: 25.0),
-                      child: Divider(
-                        color: Colors.black,
-                        height: 1,
+              cubit.buttonIndex == 0
+                  ? Expanded(
+                    child: ListView.separated(
+                      shrinkWrap: true,
+                      separatorBuilder: (context, index) => const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 25.0),
+                        child: Divider(
+                          color: Colors.black,
+                          height: 1,
+                        ),
+                      ),
+                      itemCount: cubit.surahModel!.data!.length ?? 0,
+                      itemBuilder: (context, index) => Directionality(
+                        textDirection: TextDirection.rtl,
+                        child: InkWell(
+                          onTap: ()
+                           {
+                             Navigator.push(context, MaterialPageRoute(builder: (context) => AyahScreen(
+                               surahIndex: index,
+                             ),));
+                          },
+                          child: ListTile(
+                              leading: CircleAvatar(
+                                  radius: 15,
+                                  backgroundColor: Colors.black,
+                                  child: Text(
+                                    '${cubit.surahModel!.data![index].number}',
+                                    style: const TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold),
+                                  )),
+                              title: Text(
+                                '${cubit.surahModel!.data![index].name}',
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.w900,
+                                    fontSize: 23),
+                              ),
+                              subtitle: Text(
+                                '${cubit.surahModel!.data![index].numberOfAyahs} - ${cubit.surahModel!.data![index].revelationType}',
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.w800,
+                                    fontSize: 16,
+                                    color: Colors.black),
+                              ),
+                              trailing:
+                                  Icon(Icons.arrow_forward_ios_rounded)),
+                        ),
                       ),
                     ),
-                    itemCount: cubit.ayahs?.data?.length ?? 0,
-                    itemBuilder: (context, index) => Directionality(
-                      textDirection: TextDirection.rtl,
-                      child: InkWell(
-                        onTap: ()
-                        {
-                        },
-                        child: ListTile(
-                            leading: CircleAvatar(
-                                radius: 15,
-                                backgroundColor: Colors.black,
-                                child: Text(
-                                  '${cubit.ayahs!.data![index].number}',
-                                  style: const TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold),
-                                )),
-                            title: Text(
-                              '${cubit.ayahs!.data![index].name}',
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.w900, fontSize: 23),
+                  )
+                  : cubit.buttonIndex == 1
+                      ? Column(
+                        children: [
+                          SizedBox(height: 100,),
+                          Text(
+                              'الاجزاء',
+                              style: TextStyle(
+                                  color: Colors.grey[400],
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.w600),
                             ),
-                            subtitle: Text(
-                              '${cubit.ayahs!.data![index].numberOfAyahs} - ${cubit.ayahs!.data![index].revelationType}',
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.w800,
-                                  fontSize: 16,
-                                  color: Colors.black),
-                            ),
-                            trailing: Icon(Icons.arrow_forward_ios_rounded)),
-                      ),
-                    ),
-                  ),
-                )
-
-              :cubit.buttonIndex==1?Text('الاجزاء'):Text('الشيوخ'),
-        
+                        ],
+                      )
+                      : Text(
+                          'الشيوخ',
+                          style: TextStyle(
+                              color: Colors.grey[400],
+                              fontSize: 30,
+                              fontWeight: FontWeight.w600),
+                        ),
             ],
           ),
         );

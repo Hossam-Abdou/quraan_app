@@ -1,29 +1,17 @@
 class AyahModel {
   int? code;
   String? status;
-  List<Data>? data;
+  Data? data;
 
   AyahModel({this.code, this.status, this.data});
 
   AyahModel.fromJson(Map<String, dynamic> json) {
     code = json['code'];
     status = json['status'];
-    if (json['data'] != null) {
-      data = <Data>[];
-      json['data'].forEach((v) {
-        data!.add(new Data.fromJson(v));
-      });
-    }  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['code'] = this.code;
-    data['status'] = this.status;
-    if (this.data != null) {
-      data['data'] = this.data!.map((v) => v.toJson()).toList();
-    }
-    return data;
+    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
   }
+
+
 }
 
 class Data {
@@ -63,22 +51,6 @@ class Data {
     json['edition'] != null ? new Edition.fromJson(json['edition']) : null;
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['number'] = this.number;
-    data['name'] = this.name;
-    data['englishName'] = this.englishName;
-    data['englishNameTranslation'] = this.englishNameTranslation;
-    data['revelationType'] = this.revelationType;
-    data['numberOfAyahs'] = this.numberOfAyahs;
-    if (this.ayahs != null) {
-      data['ayahs'] = this.ayahs!.map((v) => v.toJson()).toList();
-    }
-    if (this.edition != null) {
-      data['edition'] = this.edition!.toJson();
-    }
-    return data;
-  }
 }
 
 class Ayahs {
@@ -115,19 +87,6 @@ class Ayahs {
     sajda = json['sajda'];
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['number'] = this.number;
-    data['text'] = this.text;
-    data['numberInSurah'] = this.numberInSurah;
-    data['juz'] = this.juz;
-    data['manzil'] = this.manzil;
-    data['page'] = this.page;
-    data['ruku'] = this.ruku;
-    data['hizbQuarter'] = this.hizbQuarter;
-    data['sajda'] = this.sajda;
-    return data;
-  }
 }
 
 class Edition {
@@ -158,15 +117,4 @@ class Edition {
     direction = json['direction'];
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['identifier'] = this.identifier;
-    data['language'] = this.language;
-    data['name'] = this.name;
-    data['englishName'] = this.englishName;
-    data['format'] = this.format;
-    data['type'] = this.type;
-    data['direction'] = this.direction;
-    return data;
-  }
 }

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class PrayTime extends StatelessWidget {
+class CustomContainer extends StatelessWidget {
 String? name;
 String? time;
 
-PrayTime({this.name, this.time});
+CustomContainer({this.name, this.time});
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +24,7 @@ PrayTime({this.name, this.time});
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Text(time!,style: TextStyle(fontSize: 20),),
-                Text(name!,
-                  style: TextStyle(fontSize: 22,fontWeight: FontWeight.w900,),),
+                Text(name!,style: TextStyle(fontSize: 22,fontWeight: FontWeight.w900,),),
               ],
             ),
           ),
