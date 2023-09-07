@@ -52,7 +52,7 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
                               width: 140.w,
                               decoration: BoxDecoration(
                                 border: cubit.buttonIndex == 0
-                                    ? Border.all(color: Colors.black)
+                                    ? Border.all(width: 0)
                                     : null,
                                 borderRadius: BorderRadius.circular(
                                     cubit.buttonIndex == 0 ? 15 : 0),
@@ -80,7 +80,7 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
                               width: 140.w,
                               decoration: BoxDecoration(
                                 border: cubit.buttonIndex == 1
-                                    ? Border.all( color: Colors.black)
+                                    ? Border.all(width: 0)
                                     : null,
                                 borderRadius: BorderRadius.circular(
                                     cubit.buttonIndex == 1 ? 15 : 0),

@@ -13,12 +13,7 @@ class GetSurahError extends SystemState {
   GetSurahError(this.error);
 }
 
-class GetAyahSuccess extends SystemState {}
-class GetAyahError extends SystemState {
-  String? error;
 
-  GetAyahError(this.error);
-}
 
 class GetAzkarSuccess extends SystemState {}
 class GetAzkarError extends SystemState {
@@ -45,7 +40,11 @@ class ChatRegisterError   extends SystemState {
 }
 
 class ChatLoginloading extends SystemState {}
-class ChatLoginSuccess extends SystemState {}
+class ChatLoginSuccess extends SystemState {
+  String? token;
+
+  ChatLoginSuccess({this.token});
+}
 class ChatLoginError   extends SystemState {
   String error;
 
@@ -53,6 +52,7 @@ class ChatLoginError   extends SystemState {
 }
 
 class ChangeShownFormSuccessState   extends SystemState {}
+
 class dataReaded   extends SystemState {}
 
 

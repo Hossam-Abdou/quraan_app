@@ -1,7 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:quraan_app_test/screens/authenticate/authenticate_screen.dart';
+import 'package:quraan_app_test/screens/main_screens/home_screen.dart';
 import 'package:quraan_app_test/service/sp_helper/sp_helper.dart';
+import 'package:quraan_app_test/service/sp_helper/sp_keys.dart';
 
 import 'blocs/bloc_observer.dart';
 import 'firebase_options.dart';
@@ -16,8 +19,14 @@ main() async{
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  Widget? widget;
+  if(SharedPrefrenceHelper.getData(key: 'UserId')!=null){
+    widget=HomeScreen();
+  }else{
+    widget=AuthenticateScreen();
+  }
 
   runApp(
-      AppRoot()
+      AppRoot(startWidget: widget)
   );
 }

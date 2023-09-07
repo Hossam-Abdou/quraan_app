@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lite_rolling_switch/lite_rolling_switch.dart';
 import 'package:quraan_app_test/blocs/system_cubit.dart';
+import 'package:quraan_app_test/service/sp_helper/sp_helper.dart';
+
+import '../authenticate/authenticate_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -20,7 +23,7 @@ class HomeScreen extends StatelessWidget {
             leading:
 
              PopupMenuButton(
-               color: Colors.black,
+               color: Colors.black54,
                icon:const Icon(
                  Icons.menu_rounded,
                  color: Color(0xfffa7031),
@@ -33,10 +36,10 @@ class HomeScreen extends StatelessWidget {
                         Text('Dark Mode',style: TextStyle(color: Colors.white,fontSize: 15),),
                         AnimatedSwitch(
                           value: cubit.isShown,
-                          onChanged: (value)
-                          {
+                          onTap:()
+                            {
                             cubit.changeShownForm();
-                          },
+                            }, 
                           iconOff: Icons.lock_open,
                           iconOn: Icons.lock,
                           textOn: 'On',
@@ -48,12 +51,6 @@ class HomeScreen extends StatelessWidget {
 
                       ],
                     ),
-                  ),
-
-
-                  PopupMenuItem(
-                    child: Text('الاعدادات',style: TextStyle(color: Colors.white,fontSize: 15),textDirection: TextDirection.rtl,),
-                    value: 'option2',
                   ),
                   PopupMenuItem(
                     child: Text('الاعدادات',style: TextStyle(color: Colors.white,fontSize: 15),textDirection: TextDirection.rtl,),
@@ -67,6 +64,16 @@ class HomeScreen extends StatelessWidget {
                     child: Text('عنا',style: TextStyle(color: Colors.white,fontSize: 15),textDirection: TextDirection.rtl,),
                     value: 'option2',
                   ),
+                   PopupMenuItem(
+                       child:TextButton(
+                           onPressed: ()
+                           {
+                             SharedPrefrenceHelper.removeData(key: 'UserId');
+                             Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => AuthenticateScreen(),));
+                           },
+                           child: Text('Sign Out',style: TextStyle(color: Colors.deepOrange),))
+
+                   )
                   // Add more menu items as needed
                 ];},),
 

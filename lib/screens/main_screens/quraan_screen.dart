@@ -5,8 +5,9 @@ import 'package:quraan_app_test/blocs/system_cubit.dart';
 import 'package:quraan_app_test/model/surah_model_screen.dart';
 import 'package:quraan_app_test/screens/ayah_screen.dart';
 
-import '../../model/asd.dart';
-
+import '../quran_details_screens/parts_screen.dart';
+import '../quran_details_screens/sheikh_screen.dart';
+import '../quran_details_screens/surah_screen.dart';
 class QuraanScreen extends StatelessWidget {
 final SurahModel? surahModel;
 
@@ -101,75 +102,9 @@ QuraanScreen({this.surahModel});
                 height: 15,
               ),
               cubit.buttonIndex == 0
-                  ? Expanded(
-                    child: ListView.separated(
-                      shrinkWrap: true,
-                      separatorBuilder: (context, index) => const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 25.0),
-                        child: Divider(
-                          color: Colors.black,
-                          height: 1,
-                        ),
-                      ),
-                      itemCount: cubit.surahModel!.data!.length ?? 0,
-                      itemBuilder: (context, index) => Directionality(
-                        textDirection: TextDirection.rtl,
-                        child: InkWell(
-                          onTap: ()
-                           {
-                             Navigator.push(context, MaterialPageRoute(builder: (context) => AyahScreen(
-                               surahIndex: index,
-                             ),));
-                          },
-                          child: ListTile(
-                              leading: CircleAvatar(
-                                  radius: 15,
-                                  backgroundColor: Colors.black,
-                                  child: Text(
-                                    '${cubit.surahModel!.data![index].number}',
-                                    style: const TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold),
-                                  )),
-                              title: Text(
-                                '${cubit.surahModel!.data![index].name}',
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.w900,
-                                    fontSize: 23),
-                              ),
-                              subtitle: Text(
-                                '${cubit.surahModel!.data![index].numberOfAyahs} - ${cubit.surahModel!.data![index].revelationType}',
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.w800,
-                                    fontSize: 16,
-                                    color: Colors.black),
-                              ),
-                              trailing:
-                                  Icon(Icons.arrow_forward_ios_rounded)),
-                        ),
-                      ),
-                    ),
-                  )
-                  : cubit.buttonIndex == 1
-                      ? Column(
-                        children: [
-                          SizedBox(height: 100,),
-                          Text(
-                              'الاجزاء',
-                              style: TextStyle(
-                                  color: Colors.grey[400],
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                        ],
-                      )
-                      : Text(
-                          'الشيوخ',
-                          style: TextStyle(
-                              color: Colors.grey[400],
-                              fontSize: 30,
-                              fontWeight: FontWeight.w600),
-                        ),
+                  ? SurahScreen() : cubit.buttonIndex == 1
+                      ? PartsScreen()
+                      : SheikhScreen(),
             ],
           ),
         );

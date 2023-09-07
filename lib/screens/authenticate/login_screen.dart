@@ -3,6 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quraan_app_test/blocs/system_cubit.dart';
 import 'package:quraan_app_test/components/customField.dart';
 
+import '../../components/authenticate_button.dart';
+import '../../service/sp_helper/sp_helper.dart';
+import '../../service/sp_helper/sp_keys.dart';
 import '../main_screens/home_screen.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -11,12 +14,13 @@ class LoginScreen extends StatelessWidget {
     return BlocConsumer<SystemCubit, SystemState>(
       listener: (context, state) async {
         if (state is ChatLoginSuccess) {
-          Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => HomeScreen(),
-              ));
-          const snackBar = SnackBar(
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (context)=> HomeScreen()
+                ),);
+            SystemCubit.get(context).clearController();
+
+
+            const snackBar = SnackBar(
             content: Text('Login Successfully'),
             backgroundColor: Colors.orangeAccent,
           );
@@ -80,20 +84,8 @@ class LoginScreen extends StatelessWidget {
                       if(cubit.formKey.currentState!.validate()){
                         cubit.Login();
                       }
-
                     },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: const Color(0xffee3e28),
-                      ),
-                      height: 40,
-                      child: const Center(
-                          child: Text(
-                        'Login',
-                        style: TextStyle(color: Colors.white, fontSize: 20),
-                      )),
-                    ),
+                    child: AuthenticateButton(text: 'Login',)
                   ),
                   const SizedBox(
                     height: 20,
@@ -107,16 +99,19 @@ class LoginScreen extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Image.asset(
-                          'images/facebook.png',
-                          height: 25,
-                          color: Colors.white,
+                        Padding(
+                          padding: const EdgeInsets.only(right: 6.0),
+                          child: Image.asset(
+                            'images/facebook.png',
+                            height: 20,
+                            color: Colors.white,
+                          ),
                         ),
                         const SizedBox(width: 5,),
                         const Center(
                             child: Text(
                           'Login With Facebook',
-                          style: TextStyle(color: Colors.white, fontSize: 12),
+                          style: TextStyle(color: Colors.white, fontSize: 12,fontWeight: FontWeight.bold),
                         )),
                       ],
                     ),

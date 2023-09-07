@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../blocs/system_cubit.dart';
+import '../../components/authenticate_button.dart';
 import '../../components/customField.dart';
 import '../main_screens/home_screen.dart';
 
@@ -15,6 +16,7 @@ class RegisterScreen extends StatelessWidget {
               MaterialPageRoute(
                 builder: (context) => HomeScreen(),
               ));
+          SystemCubit.get(context).clearController();
           const snackBar = SnackBar(
             content: Text('Registered Successfully'),
             backgroundColor: Colors.green,
@@ -137,21 +139,14 @@ class RegisterScreen extends StatelessWidget {
                     onTap: () async{
                       if(cubit.formKey.currentState!.validate()){
                         cubit.Register();
+
                       }
 
                     },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Color(0xffee3e28),
-                      ),
-                      height: 40,
-                      child: Center(
-                          child: Text(
-                        'Sign Up',
-                        style: TextStyle(color: Colors.white, fontSize: 20),
-                      )),
-                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 10.0),
+                      child: AuthenticateButton(text: 'Register',),
+                    )
                   ),
                 ],
               ),
