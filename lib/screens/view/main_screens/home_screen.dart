@@ -3,7 +3,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lite_rolling_switch/lite_rolling_switch.dart';
-import 'package:quraan_app_test/blocs/system_cubit.dart';
+import 'package:quraan_app_test/screens/view_model/system_cubit.dart';
 import 'package:quraan_app_test/service/sp_helper/sp_helper.dart';
 
 import '../authenticate/authenticate_screen.dart';
@@ -11,8 +11,7 @@ import '../authenticate/authenticate_screen.dart';
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<SystemCubit, SystemState>(
-      listener: (context, state) {},
+    return BlocBuilder<SystemCubit, SystemState>(
       builder: (context, state) {
         var cubit = SystemCubit.get(context);
         return Scaffold(

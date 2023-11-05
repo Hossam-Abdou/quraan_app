@@ -1,11 +1,11 @@
 import 'package:animated_switch/animated_switch.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quraan_app_test/blocs/system_cubit.dart';
+import 'package:quraan_app_test/screens/view_model/system_cubit.dart';
 import 'package:simple_circular_progress_bar/simple_circular_progress_bar.dart';
 
 class AyahScreen extends StatefulWidget {
-  final int surahIndex; // Add this line
+  final int surahIndex;
 
   AyahScreen({required this.surahIndex});
 
@@ -17,18 +17,17 @@ class _AyahScreenState extends State<AyahScreen> {
   @override
   void initState() {
     super.initState();
-    SystemCubit.get(context).loadQuraan(context,SystemCubit.get(context).surahModel!.data![widget.surahIndex].number);
+    SystemCubit.get(context).loadQuraan(context,SystemCubit.get(context).quraanList.map((e) => e.id));
   }
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<SystemCubit, SystemState>(
-        listener: (context, state) {},
+    return BlocBuilder<SystemCubit, SystemState>(
         builder: (context, state) {
           var cubit = SystemCubit.get(context);
 
           return Scaffold(
             backgroundColor: Colors.white,
-            body:cubit.quraanList==null || cubit.quraanList.isEmpty ? Scaffold(
+            body:cubit.quraanList.isEmpty ? const Scaffold(
           body: Center(
           child: SimpleCircularProgressBar(
             progressColors:  [Colors.deepOrange],

@@ -1,25 +1,15 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quraan_app_test/blocs/system_cubit.dart';
+import 'package:quraan_app_test/screens/view_model/system_cubit.dart';
 
-import '../../components/praytime_screen.dart';
-import '../../model/azkar_model.dart';
 import '../azkar_details_screen.dart';
 
-class AzkarScreen extends StatefulWidget {
 
-  @override
-  State<AzkarScreen> createState() => _AzkarScreenState();
-}
+class AzkarScreen extends StatelessWidget {
 
-class _AzkarScreenState extends State<AzkarScreen> {
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<SystemCubit, SystemState>(
-    listener: (context, state) {},
+    return BlocBuilder<SystemCubit, SystemState>(
     builder: (context, state) {
       var cubit = SystemCubit.get(context);
       return Scaffold(
@@ -28,11 +18,11 @@ class _AzkarScreenState extends State<AzkarScreen> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                Text('الادعية و الاذكار',style: TextStyle(color: Color(0xfffa7031),fontSize: 40,fontWeight: FontWeight.w900),),
+                const Text('الادعية و الاذكار',style: TextStyle(color: Color(0xfffa7031),fontSize: 40,fontWeight: FontWeight.w900),),
                 ListView.separated(
                   separatorBuilder: (context, index) =>SizedBox(height: 15,),
                   itemCount: cubit.azkarList.length,
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   itemBuilder: (context, index)
                   {

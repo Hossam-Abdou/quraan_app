@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quraan_app_test/blocs/system_cubit.dart';
+import 'package:quraan_app_test/screens/view_model/system_cubit.dart';
 import 'package:simple_circular_progress_bar/simple_circular_progress_bar.dart';
-
-import '../../components/praytime_screen.dart';
-
+import '../components/praytime_screen.dart';
 
 class Salah extends StatefulWidget {
 
@@ -18,8 +16,7 @@ class _SalahState extends State<Salah> {
   Widget build(BuildContext context) {
     return BlocProvider.value(
   value: SystemCubit.get(context)..getPrayTime(),
-  child: BlocConsumer<SystemCubit, SystemState>(
-  listener: (context, state) {},
+  child: BlocBuilder<SystemCubit, SystemState>(
   builder: (context, state) {
     var cubit=SystemCubit.get(context);
     SystemCubit.get(context).getPrayTime();

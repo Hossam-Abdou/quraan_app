@@ -5,19 +5,19 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:meta/meta.dart';
-import 'package:quraan_app_test/model/pray_model.dart';
-import 'package:quraan_app_test/model/surah_model_screen.dart';
-import 'package:quraan_app_test/screens/main_screens/azkar_screen.dart';
 import 'package:quraan_app_test/service/sp_helper/sp_helper.dart';
+
+import '../../service/dio_helper/dio_helper.dart';
 import '../model/azkar_details_model.dart';
-import '../model/quraan_model.dart';
 import '../model/azkar_model.dart';
-import '../screens/main_screens/Favorite_screen.dart';
-import '../screens/main_screens/compass_screen.dart';
-import '../screens/main_screens/pray_time_screen.dart';
-import '../screens/main_screens/quraan_screen.dart';
-import '../service/dio_helper/dio_helper.dart';
+import '../model/pray_model.dart';
+import '../model/quraan_model.dart';
+import '../model/surah_model_screen.dart';
+import '../view/main_screens/Favorite_screen.dart';
+import '../view/main_screens/azkar_screen.dart';
+import '../view/main_screens/compass_screen.dart';
+import '../view/main_screens/pray_time_screen.dart';
+import '../view/main_screens/quraan_screen.dart';
 part 'system_state.dart';
 
 class SystemCubit extends Cubit<SystemState> {
@@ -38,7 +38,7 @@ class SystemCubit extends Cubit<SystemState> {
 
 
 
-  SurahModel? surahModel;
+  // SurahModel? surahModel;
   PrayModel? prayModel;
   Array? array;
 
@@ -49,7 +49,7 @@ class SystemCubit extends Cubit<SystemState> {
 
 
   final items =  [
-    Icon(Icons.home, size: 20,color: Colors.white,),
+    const Icon(Icons.home, size: 20,color: Colors.white,),
     SvgPicture.asset(
       'images/Heart.svg',
       width: 20,
@@ -66,9 +66,8 @@ class SystemCubit extends Cubit<SystemState> {
       'images/compass.svg',
       width: 20,
       height: 20,
-      color: Colors.white,
     ),
-    Icon(Icons.waving_hand, size: 20,color: Colors.white,),
+    const Icon(Icons.waving_hand, size: 20,color: Colors.white,),
 
   ];
 
@@ -97,27 +96,27 @@ class SystemCubit extends Cubit<SystemState> {
     AzkarScreen()
   ];
 
-  Future<void> getAllSurah() async {
-    await DioHelper.init(
-      BaseOptions(
-        baseUrl: 'https://api.alquran.cloud/',
-        receiveDataWhenStatusError: true,
-      ),
-    );
-    await DioHelper.getData(
-      url: 'v1/surah',
-    ).then(
-          (value) {
-        surahModel = SurahModel.fromJson(value.data);
-        emit(GetSurahSuccess());
-      },
-    ).catchError(
-          (error) {
-        print(error);
-        emit(GetSurahError(error.toString()));
-      },
-    );
-  }
+  // Future<void> getAllSurah() async {
+  //   await DioHelper.init(
+  //     BaseOptions(
+  //       baseUrl: 'https://api.alquran.cloud/',
+  //       receiveDataWhenStatusError: true,
+  //     ),
+  //   );
+  //   await DioHelper.getData(
+  //     url: 'v1/surah',
+  //   ).then(
+  //         (value) {
+  //       surahModel = SurahModel.fromJson(value.data);
+  //       emit(GetSurahSuccess());
+  //     },
+  //   ).catchError(
+  //         (error) {
+  //       print(error);
+  //       emit(GetSurahError(error.toString()));
+  //     },
+  //   );
+  // }
 
 
   Future<void> getPrayTime() async {

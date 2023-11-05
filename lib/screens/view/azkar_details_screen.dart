@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quraan_app_test/blocs/system_cubit.dart';
+import 'package:quraan_app_test/screens/view_model/system_cubit.dart';
 
 class SectionDetailScreen extends StatefulWidget {
   final int id;
@@ -22,15 +22,14 @@ class _SectionDetailScreenState extends State<SectionDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<SystemCubit, SystemState>(
-      listener: (context, state) {},
+    return BlocBuilder<SystemCubit, SystemState>(
       builder: (context, state) {
         var cubit = SystemCubit.get(context);
         return Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.deepOrange,
             centerTitle: true,
-            title: Text("${widget.title}"),
+            title: Text(widget.title),
           ),
           body: Padding(
             padding: const EdgeInsets.all(12.0),

@@ -1,21 +1,31 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quraan_app_test/blocs/system_cubit.dart';
+import 'package:quraan_app_test/screens/view_model/system_cubit.dart';
 
-import '../../screens/ayah_screen.dart';
+import '../ayah_screen.dart';
 
-class SurahScreen extends StatelessWidget { 
+class SurahScreen extends StatefulWidget {
   const SurahScreen({Key? key}) : super(key: key);
 
   @override
+  State<SurahScreen> createState() => _SurahScreenState();
+}
+
+class _SurahScreenState extends State<SurahScreen> {
+  @override
+  void initState() {
+    super.initState();
+    SystemCubit.get(context).loadQuraan(context,SystemCubit.get(context).quraanList.map((e) => e.id));
+  }
+  @override
   Widget build(BuildContext context) {
-    return BlocConsumer<SystemCubit, SystemState>(
-  listener: (context, state) {},
+    return BlocBuilder<SystemCubit, SystemState>(
   builder: (context, state) {
     var cubit = SystemCubit.get(context);
     return Expanded(
       child: ListView.separated(
+        physics: const BouncingScrollPhysics(),
         shrinkWrap: true,
         separatorBuilder: (context, index) => const Padding(
           padding: EdgeInsets.symmetric(horizontal: 25.0),
@@ -24,7 +34,7 @@ class SurahScreen extends StatelessWidget {
             height: 1,
           ),
         ),
-        itemCount: cubit.surahModel?.data?.length ?? 0,
+        itemCount: cubit.quraanList.map((e) => e.id).length,
         itemBuilder: (context, index) => Directionality(
           textDirection: TextDirection.rtl,
           child: InkWell(
@@ -40,26 +50,26 @@ class SurahScreen extends StatelessWidget {
                     radius: 15,
                     backgroundColor: Colors.black,
                     child: Text(
-                      '${cubit.surahModel!.data![index].number}',
+                      '${cubit.quraanList[index].id}',
                       style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold),
                     )),
                 title: Text(
-                  '${cubit.surahModel!.data![index].name}',
+                  '${cubit.quraanList[index].name}',
                   style: const TextStyle(
                       fontWeight: FontWeight.w900,
                       fontSize: 23),
                 ),
                 subtitle: Text(
-                  '${cubit.surahModel!.data![index].numberOfAyahs} - ${cubit.surahModel!.data![index].revelationType}',
+                  '${cubit.quraanList[index].array?.length} - ${cubit.quraanList[index].type}',
                   style: const TextStyle(
                       fontWeight: FontWeight.w800,
                       fontSize: 16,
                       color: Colors.black),
                 ),
                 trailing:
-                Icon(Icons.arrow_forward_ios_rounded)),
+                const Icon(Icons.arrow_forward_ios_rounded)),
           ),
         ),
       ),

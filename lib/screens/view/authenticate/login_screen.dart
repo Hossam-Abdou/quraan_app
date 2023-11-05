@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quraan_app_test/blocs/system_cubit.dart';
-import 'package:quraan_app_test/components/customField.dart';
-
-import '../../components/authenticate_button.dart';
-import '../../service/sp_helper/sp_helper.dart';
-import '../../service/sp_helper/sp_keys.dart';
+import 'package:quraan_app_test/screens/view_model/system_cubit.dart';
+import '../components/authenticate_button.dart';
+import '../components/customField.dart';
 import '../main_screens/home_screen.dart';
 
 class LoginScreen extends StatelessWidget {

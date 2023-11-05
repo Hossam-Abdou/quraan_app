@@ -1,22 +1,17 @@
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quraan_app_test/blocs/system_cubit.dart';
-import 'package:quraan_app_test/model/surah_model_screen.dart';
-import 'package:quraan_app_test/screens/ayah_screen.dart';
-
+import 'package:quraan_app_test/screens/view_model/system_cubit.dart';
+import '../../model/surah_model_screen.dart';
 import '../quran_details_screens/parts_screen.dart';
 import '../quran_details_screens/sheikh_screen.dart';
 import '../quran_details_screens/surah_screen.dart';
-class QuraanScreen extends StatelessWidget {
-final SurahModel? surahModel;
 
-QuraanScreen({this.surahModel});
+class QuraanScreen extends StatelessWidget {
+
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<SystemCubit, SystemState>(
-      listener: (context, state) {},
+    return BlocBuilder<SystemCubit, SystemState>(
       builder: (context, state) {
         var cubit = SystemCubit.get(context);
         return Scaffold(
@@ -35,7 +30,7 @@ QuraanScreen({this.surahModel});
                   height: 55,
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.black),
-                      borderRadius: BorderRadius.circular(17)),
+                      borderRadius: BorderRadius.circular(17),),
                   child: Directionality(
                     textDirection: TextDirection.rtl,
                     child: Row(

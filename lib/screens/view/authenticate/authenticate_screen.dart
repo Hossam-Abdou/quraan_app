@@ -2,9 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:quraan_app_test/blocs/system_cubit.dart';
-import 'package:quraan_app_test/screens/authenticate/login_screen.dart';
-import 'package:quraan_app_test/screens/authenticate/register_screen.dart';
+import 'package:quraan_app_test/screens/view/authenticate/register_screen.dart';
+import 'package:quraan_app_test/screens/view_model/system_cubit.dart';
+
+import 'login_screen.dart';
+
 
 class AuthenticateScreen extends StatefulWidget {
   @override

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quraan_app_test/blocs/system_cubit.dart';
+import 'package:quraan_app_test/screens/view_model/system_cubit.dart';
 
 class SheikhScreen extends StatefulWidget {
 
@@ -14,7 +14,7 @@ class _SheikhScreenState extends State<SheikhScreen> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(height: 100,),
+        const SizedBox(height: 100,),
         Text(
           'الشيوخ',
           style: TextStyle(
